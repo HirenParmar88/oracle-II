@@ -1,0 +1,73 @@
+CREATE TABLE PRODUCTMASTER(
+PRODUCTID NUMBER(4) CONSTRAINTS PKPID1 PRIMARY KEY,
+PRODUCTNAME VARCHAR2(20) NOT NULL,
+PRODUCTPRICE NUMBER(3) 
+);
+
+CREATE TABLE PRODUCTORDER(
+PRODUCTID NUMBER(4),
+QUNTITY NUMBER(3),
+CONSTRAINT FKPID1 FOREIGN KEY (PRODUCTID)
+REFERENCES PRODUCTMASTER(PRODUCTID)
+);
+
+SQL> DESC PRODUCTMASTER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCTID                                 NOT NULL NUMBER(4)
+ PRODUCTNAME                               NOT NULL VARCHAR2(20)
+ PRODUCTPRICE                                       NUMBER(3)
+
+SQL> DESC PRODUCTORDER;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ PRODUCTID                                          NUMBER(4)
+ QUNTITY                                            NUMBER(3)
+ 
+ ---->INSERT 5 RECORDS IN BOTH THE TABLES...
+ 
+ SQL> INSERT INTO PRODUCTMASTER VALUES(1,'MOBILE',700);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCTORDER VALUES(1,1);
+
+1 row created.
+
+SQL> SELECT * FROM PRODUCTMASTER;
+
+ PRODUCTID PRODUCTNAME          PRODUCTPRICE
+---------- -------------------- ------------
+         1 MOBILE                        700
+         2 KEYBOARD                      200
+         3 MOUSE                         300
+         4 EARPHONE                      600
+         5 CHARGER                       400
+
+SQL> SELECT * FROM PRODUCTORDER;
+
+ PRODUCTID    QUNTITY
+---------- ----------
+         1          1
+         2          2
+         3          3
+         4          4
+         5          5
+
+-----> DISPLAY RECORDS OF BOTH TABLES USING PROCEDURE...
+
+CREATE OR REPLACE PROCEDURE P_DISP(PRODUCTID NUMBER,PRODUCTNAME VARCHAR,PRODUCTPRICE NUMBER)
+AS
+BEGIN
+	SELECT PRODUCTMASTER.PRODUCTID,PRODUCTMASTER.PRODUCTNAME,PRODUCTMASTER.PRODUCTPRICE 
+	FROM PRODUCTMASTER JOIN PRODUCTORDER 
+	ON PRODUCTMASTER.PRODUCTID=PRODUCTORDER.PRODUCTID ORDER BY PRODUCTID;
+END;
+/	
+CREATE OR REPLACE PROCEDURE P_DISP(PRODUCTID NUMBER)
+AS
+BEGIN
+	SELECT *
+	FROM PRODUCTMASTER; 
+END;
+/	

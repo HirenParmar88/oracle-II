@@ -1,0 +1,19 @@
+DECLARE
+	MIN1 NUMBER:=0;
+	N1 NUMBER;
+	N2 NUMBER;
+	N3 NUMBER;
+BEGIN
+	N1:&N1;
+	N2:&N2;
+	N3:&N3;
+	
+	DBMS_OUTPUT.PUT_LINE('================');
+	
+	IF MIN1>N1 THEN
+		MIN1:=N1;
+	END IF
+	IF MIN1>N2 THEN
+		MIN1:=N2;
+END;
+/

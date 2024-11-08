@@ -1,0 +1,21 @@
+DECLARE
+
+	N NUMBER:=51;
+	R NUMBER;
+	
+BEGIN
+
+	R:=MOD(N,2);
+	
+	DBMS_OUTPUT.PUT_LINE('============');
+	
+	IF R=0 THEN
+		DBMS_OUTPUT.PUT_LINE('EVEN...');
+	ELSE
+		DBMS_OUTPUT.PUT_LINE('ODD');
+	END IF;
+	
+	DBMS_OUTPUT.PUT_LINE('============');
+	
+END;
+/
